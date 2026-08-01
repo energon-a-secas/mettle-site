@@ -2,7 +2,8 @@
 // Three views: compass (home), probe runner, result. The active probe
 // run lives in state.active; otherwise the compass is shown.
 
-import { $, escHtml, radarSvg } from './utils.js';
+import { $, escHtml } from './utils.js';
+import { viz } from './viz.js';
 import { VIRTUES, RANKS, THEMES, FAST_OPTIONS } from './data.js';
 import { scoreVirtues, overallScore, rankFor, dominantVirtue } from './scorer.js';
 
@@ -65,7 +66,7 @@ function renderCompass(s) {
   return `
   <section class="section compass">
     <div class="compass__hero card">
-      <div class="compass__radar">${radarSvg(VIRTUES, s.scores)}</div>
+      <div class="compass__radar">${viz.radar(VIRTUES, [{ values: s.scores, color: 'var(--accent)' }], { max: 100, ariaLabel: 'Virtue radar chart', frame: false })}</div>
       <div class="compass__summary">
         <p class="eyebrow">Maturity rank</p>
         <h2 class="rank-name">${escHtml(rank.label)}</h2>
