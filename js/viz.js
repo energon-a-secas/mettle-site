@@ -319,7 +319,7 @@ export function timeline(events = [], o = {}) {
   return frame(`${svgOpen(w, h, o, 'preserveAspectRatio="none"')}<line class="viz-axis" x1="${padX}" y1="${baseY}" x2="${w - padX}" y2="${baseY}"/>${ref}${stems}</svg>`, o);
 }
 
-/* ── Dense series (canvas) — ports logscope decimation ─────── */
+/* ── Dense series (canvas) — ports hwinfo-viewer decimation ─────── */
 /** Draw a min/max-per-pixel decimated line into a <canvas> for huge series. */
 export function canvasLine(canvas, values, o = {}) {
   if (!canvas || !values?.length) return;
