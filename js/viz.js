@@ -78,7 +78,8 @@ export function statGrid(items = []) {
 }
 
 /* ── Bars (vertical) ───────────────────────────────────────── */
-/** data: [{ label, value, color? }] ; opts.stacked with value as array + opts.keys */
+/** data: [{ label, value, color? }] ; opts.stacked with value as array + opts.keys
+ *  opts.tickEvery: label every Nth bar (default: auto, ~14 labels max) */
 export function bars(data = [], o = {}) {
   if (!data.length) return frame(empty('No data', { frame: false }), o);
   const w = o.width || 320, h = o.height || 160;
@@ -91,6 +92,13 @@ export function bars(data = [], o = {}) {
   const gap = pw / n * 0.28;
   const bw = pw / n - gap;
   const yAt = (v) => pad.t + ph - (v / max) * ph;
+  // A dense series needs fewer axis labels than it has bars: 90 daily bars
+  // render 90 overlapping ticks. Thin the labels, never the bars, and every bar
+  // keeps its own tooltip. Up to 14 bars behave exactly as before.
+  const every = o.tickEvery || Math.max(1, Math.ceil(n / 14));
+  const tickAt = (i, label, cx) => (i % every === 0
+    ? `<text class="viz-tick" x="${cx}" y="${h - 8}" text-anchor="middle">${esc(label)}</text>`
+    : '');
 
   const grid = [0, 0.25, 0.5, 0.75, 1].map((f) => {
     const y = pad.t + ph - f * ph;
@@ -108,11 +116,11 @@ export function bars(data = [], o = {}) {
         const key = o.keys ? o.keys[k] : `#${k + 1}`;
         return `<rect class="viz-bar${cls}" x="${x.toFixed(1)}" y="${y1.toFixed(1)}" width="${bw.toFixed(1)}" height="${(y0 - y1).toFixed(1)}" fill="${color}" rx="1.5"><title>${esc(d.label)} · ${esc(key)}: ${fmt(v)}</title></rect>`;
       }).join('');
-      return `${segs}<text class="viz-tick" x="${(x + bw / 2).toFixed(1)}" y="${h - 8}" text-anchor="middle">${esc(d.label)}</text>`;
+      return `${segs}${tickAt(i, d.label, (x + bw / 2).toFixed(1))}`;
     }
     const y = yAt(d.value);
     const color = d.color || paletteAt(i, o.colors);
-    return `<rect class="viz-bar${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${(pad.t + ph - y).toFixed(1)}" fill="${color}" rx="2"><title>${esc(d.label)}: ${fmt(d.value)}</title></rect><text class="viz-tick" x="${(x + bw / 2).toFixed(1)}" y="${h - 8}" text-anchor="middle">${esc(d.label)}</text>`;
+    return `<rect class="viz-bar${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${(pad.t + ph - y).toFixed(1)}" fill="${color}" rx="2"><title>${esc(d.label)}: ${fmt(d.value)}</title></rect>${tickAt(i, d.label, (x + bw / 2).toFixed(1))}`;
   }).join('');
 
   return frame(`${svgOpen(w, h, o)}${grid}${barsSvg}</svg>`, o);
