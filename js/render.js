@@ -9,8 +9,8 @@ import { scoreVirtues, overallScore, rankFor, dominantVirtue } from './scorer.js
 
 const RUNG_NAMES = ['External', 'Surface', 'Causal', 'Systemic', 'Integrated'];
 const RUNG_HINTS = [
-  'Borrowed authority — no internal model yet.',
-  'Received wisdom — a single surface cause.',
+  'Borrowed authority: no internal model yet.',
+  'Received wisdom: a single surface cause.',
   'Cause and effect, with named tradeoffs.',
   'Second-order effects; a self-owned model.',
   'The principle transfers; uncertainty held openly.',
@@ -120,7 +120,7 @@ function renderVirtuesModal() {
         </button>
       </header>
       <div class="modal__body">
-        <p class="virtues-intro">Mettle charts your reasoning across five qualities of judgment. Each probe exercises one or two of them — and they rise from how you reason, not what you claim.</p>
+        <p class="virtues-intro">Mettle charts your reasoning across five qualities of judgment. Each probe exercises one or two of them, and they rise from how you reason, not what you claim.</p>
         <ul class="virtue-list">${rows}</ul>
       </div>
     </div>
@@ -153,7 +153,7 @@ function renderProbe(s) {
       <h2 class="probe__prompt">${escHtml(rung.prompt)}</h2>
       ${body}
       <div class="probe__actions">
-        <span class="probe__hint">${mode === 'fast' ? 'A quick estimate — pick the closest.' : 'No going back once submitted — answer honestly.'}</span>
+        <span class="probe__hint">${mode === 'fast' ? 'A quick estimate, pick the closest.' : 'No going back once submitted, answer honestly.'}</span>
         <button class="btn btn--primary" id="probeNext">${last ? 'Finish probe' : 'Next'}</button>
       </div>
     </div>
@@ -162,7 +162,7 @@ function renderProbe(s) {
 
 function renderSlowBody(draft) {
   return `
-    <textarea id="probeAnswer" class="probe__answer" rows="6" placeholder="Write the real reasoning — the why behind the why. Short or empty answers score low by design.">${escHtml(draft.answer || '')}</textarea>
+    <textarea id="probeAnswer" class="probe__answer" rows="6" placeholder="Write the real reasoning. The why behind the why. Short or empty answers score low by design.">${escHtml(draft.answer || '')}</textarea>
     <div class="probe__conf">
       <label for="probeConf">How confident are you in this answer? <span id="confVal">${draft.confidence ?? 50}</span>%</label>
       <input type="range" id="probeConf" min="0" max="100" step="5" value="${draft.confidence ?? 50}">
@@ -206,7 +206,7 @@ function renderResult(s, themeId) {
   }).join('');
 
   const flag = isFast
-    ? `<p class="consistency fast">Fast estimate — does not affect your rank. Run it in Slow mode to measure for real.</p>`
+    ? `<p class="consistency fast">Fast estimate, does not affect your rank. Run it in Slow mode to measure for real.</p>`
     : res.consistency.ok
       ? `<p class="consistency ok">Coherent across rungs.</p>`
       : `<p class="consistency warn">⚠ ${escHtml(res.consistency.note)}</p>`;

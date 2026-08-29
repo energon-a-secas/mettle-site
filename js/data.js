@@ -79,7 +79,7 @@ export const THEMES = [
     virtues: ['courage', 'eloquence'],
     rungs: [
       { id: 'R0', kind: 'trigger',    prompt: 'Recall a moment you could not answer a question in front of people who held power over you. What happened, and what did you feel?' },
-      { id: 'R1', kind: 'recovery',   prompt: 'Could you exit that situation more gracefully now — a more dignified, even neutral, loss? Describe exactly how.' },
+      { id: 'R1', kind: 'recovery',   prompt: 'Could you exit that situation more gracefully now. A more dignified, even neutral, loss? Describe exactly how.' },
       { id: 'R2', kind: 'durability', prompt: 'Do you believe you would fall to it again? Why, or why not?' },
       { id: 'R3', kind: 'root',       prompt: 'What has to be true about you for that answer to hold?' },
       { id: 'R4', kind: 'transfer',   prompt: 'Where else does that same root show up in your life?' },
@@ -93,7 +93,7 @@ export const THEMES = [
       { id: 'R0', kind: 'trigger',    prompt: 'Describe a mistake of yours that others saw. What was your first instinct in that moment?' },
       { id: 'R1', kind: 'recovery',   prompt: 'How would you own it now in a way that costs you less and earns more respect?' },
       { id: 'R2', kind: 'durability', prompt: 'What stops you from repeating the original instinct next time?' },
-      { id: 'R3', kind: 'root',       prompt: 'Why does owning it matter to you — beyond looking good?' },
+      { id: 'R3', kind: 'root',       prompt: 'Why does owning it matter to you: beyond looking good?' },
     ],
   },
   {
@@ -124,7 +124,7 @@ export const THEMES = [
     virtues: ['eloquence', 'courage'],
     rungs: [
       { id: 'R0', kind: 'trigger',    prompt: 'Recall defending a decision to people who wanted it to fail. Where did it go wrong?' },
-      { id: 'R1', kind: 'recovery',   prompt: 'How would you hold the room now — a more dignified, even neutral, outcome?' },
+      { id: 'R1', kind: 'recovery',   prompt: 'How would you hold the room now: a more dignified, even neutral, outcome?' },
       { id: 'R2', kind: 'durability', prompt: 'Do you believe you would crack under that pressure again? Why?' },
       { id: 'R3', kind: 'root',       prompt: 'What has to be true about your preparation for you to stay composed?' },
       { id: 'R4', kind: 'transfer',   prompt: 'Where else does staying composed under pressure decide your outcomes?' },

@@ -65,7 +65,7 @@ function consistencyCheck(rungs) {
   const recovery = byKind.recovery;
   const root = byKind.root;
   if (recovery && root && recovery.level >= 3 && root.level <= 0) {
-    return { ok: false, penalty: 0.85, note: 'recovery polished but root shallow — looks performed' };
+    return { ok: false, penalty: 0.85, note: 'recovery polished but root shallow: looks performed' };
   }
   return { ok: true, penalty: 1.0, note: 'coherent across rungs' };
 }
@@ -87,7 +87,7 @@ export function scoreTheme(theme, answers, mode = 'slow') {
     return { id: rung.id, kind: rung.kind, level, confidence: a.confidence ?? null, calib };
   });
 
-  const consistency = fast ? { ok: true, penalty: 1, note: 'fast estimate — not anti-fake checked' } : consistencyCheck(rungs);
+  const consistency = fast ? { ok: true, penalty: 1, note: 'fast estimate: not anti-fake checked' } : consistencyCheck(rungs);
   const meanLevel = rungs.reduce((s, r) => s + r.level * r.calib, 0) / rungs.length;
   const raw = (meanLevel / RUNG_MAX) * 100 * consistency.penalty;
   const score = Math.round(Math.max(0, Math.min(100, raw)));
