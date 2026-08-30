@@ -4,6 +4,7 @@
 
 - Live: https://mettle.neorgon.com/
 - Part of the Neorgon tool suite (free, no signup, runs in your browser): https://neorgon.com/
+- Keywords: reasoning, assessment, pressure, interview
 
 ## More Neorgon tools
 
